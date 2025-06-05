@@ -57,7 +57,7 @@ spec:
         "kubernetes.io/os": linux
       containers:
       - name: azure-vote-front
-        image: rakbankdevcontainerregistry.azurecr.io/vote-app:07dd19a99780e40080b597ba3c00e2ca79cb9253
+        image: rakbankdevcontainerregistry.azurecr.io/vote-app:taggg
         ports:
         - containerPort: 80
         resources:
