@@ -31,14 +31,23 @@ name: Build and deploy an app to AKS
 
 on:
   push:
-    branches: ["master"]
+    branches: ["dev", "test"]
   workflow_dispatch:
 
 env:
   AZURE_CONTAINER_REGISTRY: "rakbankdevcontainerregistry"
-  CONTAINER_NAME: "vote-app"
+  CONTAINER_NAME: ${{
+     github.ref_name == 'dev' && 'vote-app-dev'
+    || github.ref_name == 'test'    && 'vote-app-test'
+    ||                                'vote-app-stage'
+    }}
   RESOURCE_GROUP: "rak-bank-demo"
-  CLUSTER_NAME: "rak-bank-dev"
+  # CLUSTER_NAME: ${{ (github.ref_name == 'dev') && 'rak-bank-dev' || (github.ref_name == 'test') && 'rak-bank-test' || 'rak-bank-stage' }}
+  CLUSTER_NAME: ${{
+     github.ref_name == 'dev' && 'rak-bank-dev'
+    || github.ref_name == 'test'    && 'rak-bank-test'
+    ||                                'rak-bank-stage'
+    }}
   DEPLOYMENT_MANIFEST_PATH: "azure-vote-all-in-one-redis.yaml"
 
 jobs:
