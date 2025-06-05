@@ -36,11 +36,7 @@ on:
 
 env:
   AZURE_CONTAINER_REGISTRY: "rakbankdevcontainerregistry"
-  CONTAINER_NAME: ${{
-     github.ref_name == 'dev' && 'vote-app-dev'
-    || github.ref_name == 'test'    && 'vote-app-test'
-    ||                                'vote-app-stage'
-    }}
+  CONTAINER_NAME: "vote-app"
   RESOURCE_GROUP: "rak-bank-demo"
   # CLUSTER_NAME: ${{ (github.ref_name == 'dev') && 'rak-bank-dev' || (github.ref_name == 'test') && 'rak-bank-test' || 'rak-bank-stage' }}
   CLUSTER_NAME: ${{
